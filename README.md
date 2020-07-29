@@ -24,7 +24,7 @@ This README will document the instructions necessary to setup the SUTD Discourse
 
 [go to top](#top)
 
-For now, we will be using Namecheap, DigitalOcean and Mailgun. Once we have gone official, we will be migrating to the Microsoft Outlook MX Mail Server officially utilized by SUTD so as to smoothly support and integrate into the SUTD emailing system. We will also consider migrating to `discourse.sutd.edu.sg` as the official subdomain and utilizing an internal SUTD server to provide hosting services, thereby slowly migrating away from external service providers such as Namecheap and DigitalOcean over time. The usage of Let's Encrypt would be reconsidered in the future, but it is likely to stay (unless we migrate from DV to OV or even EV certificates). The system environment setup (such as using Ubuntu 18.04.3 LTS x64 and Docker) should be similar between our current setup and the eventual official setup. Any instructions for migration and system update/upgrade would be documented here as well.
+For now, we will be using Namecheap, DigitalOcean and Mailgun. Once we have gone official, we will be migrating to the Microsoft Outlook MX Mail Server officially utilized by SUTD so as to smoothly support and integrate into the SUTD emailing system and its current Active Directory. We will also consider migrating to `discourse.sutd.edu.sg` as the official subdomain and utilizing an internal SUTD server to provide hosting services, thereby slowly migrating away from external service providers such as Namecheap and DigitalOcean over time. The usage of Let's Encrypt would be reconsidered in the future, but it is likely to stay (unless we migrate from DV to OV or even EV certificates). The system environment setup (such as using Ubuntu 18.04.3 LTS x64 and Docker) should be similar between our current setup and the eventual official setup. Any instructions for migration and system update/upgrade would be documented here as well.
 
 > NOTE: We would need to switch to-and-fro between Namecheap, DigitalOcean and Mailgun as we need relevant information from one another to be inputted to each other's settings panels for a complete setup.
 
@@ -182,7 +182,7 @@ Remember to activate and apply the DigitalOcean Cloud Firewall to the Droplet af
 
 We will list down the features that we enabled and plugins that we are using here!
 
-Every time before rebuilding the Discourse forum after adding a `git clone` plugin entry in the `app.yml` file, ensure that you temporarily disable the DigitalOcean Cloud Firewall rules. Else, it will fail to properly rebuild and restart the app.
+> Every time before rebuilding the Discourse forum after adding a `git clone` plugin entry in the `app.yml` file, ensure that you temporarily disable the DigitalOcean Cloud Firewall rules. Else, it will fail to properly rebuild and restart the app.
 
 #### Features
 
@@ -196,6 +196,7 @@ More content coming soon!
 - https://github.com/discourse/discourse-data-explorer.git
 - https://github.com/discourse/discourse-calendar.git
 - https://github.com/discourse/discourse-cakeday.git
+- https://github.com/discourse/discourse-assign.git
 
 ## Forum Theme Installation <a name="theme"></a>
 

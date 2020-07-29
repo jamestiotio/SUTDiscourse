@@ -46,7 +46,7 @@ Firstly, obtain a domain name from Namecheap. Enable `WhoisGuard` (it's free) wi
 
 #### DigitalOcean
 
-> While DigitalOcean does not provide a robust protection against DDoS attacks at the Droplet level (read more about it [here](https://www.digitalocean.com/community/questions/does-digitalocean-have-an-anti-ddos-protection?answer=32485)), Cloudflare CDN and Discourse have not historically played well together (read more about it [here](https://meta.discourse.org/t/enable-a-cdn-for-your-discourse/14857) and [here](https://meta.discourse.org/t/setting-up-https-support-with-lets-encrypt/40709)). Currently, there are no Caddy module implementations [here](https://github.com/caddy-dns/) for Fastly support. We are also not using Caddy since the default `discourse-setup` now already provides auto-renewed SSL (using a daily cron job) + HTTP2 + QUIC out of the box. If we were to use a CDN in the future for mitigation against DDoS attacks, we would elaborate more here (might need to use the corresponding API keys or scoped tokens for HTTPS support with CDN). For future reference, refer to [here](https://meta.discourse.org/t/running-discourse-with-caddy-server/54716) or [here](https://github.com/caddyserver/examples/tree/master/discourse) to setup Caddy for Discourse. The latter requires manual installation of [Go](https://www.digitalocean.com/community/tutorials/how-to-install-go-and-set-up-a-local-programming-environment-on-ubuntu-18-04) (latest version) and [Caddy](https://www.digitalocean.com/community/tutorials/how-to-host-a-website-with-caddy-on-ubuntu-18-04) on the Droplet to facilitate the execution of Caddy without a container.
+> While DigitalOcean does not provide a robust protection against DDoS attacks at the Droplet level (read more about it [here](https://www.digitalocean.com/community/questions/does-digitalocean-have-an-anti-ddos-protection?answer=32485)), Cloudflare CDN and Discourse have not historically played well together (read more about it [here](https://meta.discourse.org/t/enable-a-cdn-for-your-discourse/14857) and [here](https://meta.discourse.org/t/setting-up-https-support-with-lets-encrypt/40709)). Currently, there are no Caddy module implementations [here](https://github.com/caddy-dns/) for Fastly support. We are also not using Caddy since the default `discourse-setup` now already provides auto-renewed SSL (through a daily cron job) + HTTP2 + QUIC out of the box. If we were to use a CDN in the future for mitigation against DDoS attacks, we would elaborate more here (might need to use the corresponding API keys or scoped tokens for HTTPS support with CDN). For future reference, refer to [here](https://meta.discourse.org/t/running-discourse-with-caddy-server/54716) or [here](https://github.com/caddyserver/examples/tree/master/discourse) to setup Caddy for Discourse. The latter requires manual installation of [Go](https://www.digitalocean.com/community/tutorials/how-to-install-go-and-set-up-a-local-programming-environment-on-ubuntu-18-04) (latest version) and [Caddy](https://www.digitalocean.com/community/tutorials/how-to-host-a-website-with-caddy-on-ubuntu-18-04) on the Droplet to facilitate the execution of Caddy without a container.
 
 Create a DigitalOcean `Droplet` (Cloud Virtual Machine). You could park it under a project named `SUTDiscourse`. These are the settings for the `Droplet`:
 
@@ -99,8 +99,8 @@ In Namecheap > `Domain List`, select your domain and click `Manage`. Under the `
 
 | Type | Host | Value | TTL |
 | --- | --- | --- | --- |
-| A Record | @ | `<DigitalOcean Droplet's IPv4 Address>` | 60 min |
-| A Record | www | `<DigitalOcean Droplet's IPv4 Address>` | 60 min |
+| A Record | `@` | `<DigitalOcean Droplet's IPv4 Address>` | 60 min |
+| A Record | `www` | `<DigitalOcean Droplet's IPv4 Address>` | 60 min |
 
 > If you are pointing the `discourse` subdomain to the Droplet instead of the main root domain, use `discourse` and `www.discourse` as the values under `Host` respectively.
 
@@ -108,7 +108,7 @@ To improve the security of the issued SSL certificates, we can restrict the cert
 
 | Type       | Host | Flag | Tag     | Value (CAA Identifying Domain) | TTL    |
 | ---------- | ---- | ---- | ------- | ------------------------------ | ------ |
-| CAA Record | @    | 0    | `issue` | `letsencrypt.org`              | 60 min |
+| CAA Record | `@`  | `0`  | `issue` | `letsencrypt.org`              | 60 min |
 
 #### Namecheap-Mailgun
 
@@ -128,8 +128,8 @@ In Namecheap > `Domain List`, select your domain and click `Manage`. Under the `
 
 | Type | Host | Mail Server | Priority | TTL |
 | --- | --- | --- | --- | --- |
-| MX Record | `mg` | `mxa.eu.mailgun.org` | 10 | Automatic |
-| MX Record | `mg` | `mxb.eu.mailgun.org` | 10 | Automatic |
+| MX Record | `mg` | `mxa.eu.mailgun.org` | `10` | Automatic |
+| MX Record | `mg` | `mxb.eu.mailgun.org` | `10` | Automatic |
 
 > If you chose `US`, replace any `eu.mailgun.org` with `mailgun.org`.
 
@@ -139,7 +139,7 @@ After entering the records for the first time, you should verify the DNS records
 
 [go to top](#top)
 
-Access your DigitalOcean's cloud server through SSH. Follow the instructions [here](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) first, without setting up `UFW` (since we are already using DigitalOcean Cloud Firewall).
+Access your DigitalOcean's cloud server via SSH. Follow the instructions [here](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) first, without setting up `UFW` (since we are already using DigitalOcean Cloud Firewall).
 
 > Reasoning behind our choice of DigitalOcean Cloud Firewall instead of `UFW` is explained [here](https://www.digitalocean.com/community/questions/disabling-ufw-in-favour-of-do-cloud-firewall#comment_70283). Please only choose one to avoid redundancy or even conflicting firewall rules.
 

@@ -2,9 +2,11 @@
 
 The platform for SUTD's community discussion. Free, open, simple.
 
+<a href="https://observatory.mozilla.org/analyze/sutdiscourse.org"><img alt="Mozilla HTTP Observatory Grade" src="https://img.shields.io/mozilla-observatory/grade-score/sutdiscourse.org?publish&style=for-the-badge"></a>
+
 ## Introduction
 
-This README will document the instructions necessary to setup the SUTD Discourse Forum from a sysadmin point of view, as well as list off the plugins that we are using in the forum. Meanwhile, the repository will host the files used for the custom SUTD theme style used for the forum.
+This README will document the instructions necessary to setup the SUTD Discourse Forum from a sysadmin perspective or point of view, as well as list off the plugins that we are using in the forum. Meanwhile, the repository will host the files used for the custom SUTD theme style used for the forum.
 
 ## Table of Contents <a name="top"></a>
 
@@ -104,9 +106,9 @@ In Namecheap > `Domain List`, select your domain and click `Manage`. Under the `
 
 To improve the security of the issued SSL certificates, we can restrict the certificate issuance. Since we are using Let's Encrypt, add another record with the following details:
 
-| Type       | Host | Flag | Tag     | Value (CAA Identifying Domain) | TTL       |
-| ---------- | ---- | ---- | ------- | ------------------------------ | --------- |
-| CAA Record | @    | 0    | `issue` | `letsencrypt.org`              | Automatic |
+| Type       | Host | Flag | Tag     | Value (CAA Identifying Domain) | TTL    |
+| ---------- | ---- | ---- | ------- | ------------------------------ | ------ |
+| CAA Record | @    | 0    | `issue` | `letsencrypt.org`              | 60 min |
 
 #### Namecheap-Mailgun
 
@@ -172,11 +174,28 @@ If you would like to redirect the `www` subdomain to the root domain directory, 
 
 Reboot the Droplet after running the aforementioned commands and rebuild the Discourse forum to restart the Docker container.
 
+Remember to activate and apply the DigitalOcean Cloud Firewall to the Droplet after rebuilding the forum.
+
 ### Step 5: Add Extra Features & Plugins <a name="step-5"></a>
 
 [go to top](#top)
 
 We will list down the features that we enabled and plugins that we are using here!
+
+Every time before rebuilding the Discourse forum after adding a `git clone` plugin entry in the `app.yml` file, ensure that you temporarily disable the DigitalOcean Cloud Firewall rules. Else, it will fail to properly rebuild and restart the app.
+
+#### Features
+
+More content coming soon!
+
+#### Plugins
+
+- https://github.com/discourse/docker_manager.git (default built-in)
+- https://github.com/discourse/discourse-spoiler-alert.git
+- https://github.com/discourse/discourse-solved.git
+- https://github.com/discourse/discourse-data-explorer.git
+- https://github.com/discourse/discourse-calendar.git
+- https://github.com/discourse/discourse-cakeday.git
 
 ## Forum Theme Installation <a name="theme"></a>
 

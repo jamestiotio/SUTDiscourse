@@ -68,6 +68,7 @@ After that, create a DigitalOcean Cloud Firewall (`Manage` > `Networking` > `Fir
   | Type | Protocol | Port Range | Sources |
   | --- | --- | --- | --- |
   | SSH | TCP | 22 | `All IPv4` `All IPv6` |
+  | HTTP | TCP | 80 | `All IPv4` `All IPv6` |
   | HTTPS | TCP | 443 | `All IPv4` `All IPv6` |
   
 - Outbound Rules:

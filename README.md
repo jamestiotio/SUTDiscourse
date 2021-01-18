@@ -177,6 +177,15 @@ Reboot the Droplet after running the aforementioned commands and rebuild the Dis
 
 Remember to activate and apply the DigitalOcean Cloud Firewall to the Droplet after rebuilding the forum.
 
+> For regular maintenance, whereby Discourse would need to be regularly updated via the `/admin/upgrade` subcategory directory on the website, we would also need to routinely run these commands to reclaim enough space so as to ensure that there would be minimal lag and prevent any `502 Bad Gateway` timeout errors:
+  ```console
+  $ sudo -s
+  $ cd /var/discourse
+  $ ./launcher rebuild app
+  $ ./launcher cleanup
+  ```
+> This is to remove any stopped Docker containers, delete any build cache, expunge any unused networks (if any) and prune any old dangling Docker images which might slowly pile up in the server for some reason. A cron(tab) job could also be set up to routinely conduct and execute this maintenance process.
+
 ### Step 5: Add Extra Features & Plugins <a name="step-5"></a>
 
 [go to top](#top)

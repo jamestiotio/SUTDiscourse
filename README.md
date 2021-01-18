@@ -215,7 +215,7 @@ Add this line to the `/var/spool/cron/crontabs/root` file using your preferred s
 @monthly . cd /var/discourse && ./launcher rebuild app && ./launcher cleanup
 ```
 
-> Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file.
+> Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file. Alternatively, you could also specify a different custom time interval, instead of `@monthly`.
 
 ### Step 6: Add Extra Features & Plugins <a name="step-6"></a>
 

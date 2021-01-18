@@ -15,7 +15,8 @@ This README will document the instructions necessary to setup the SUTD Discourse
   * [Step 2: Service Inter-Connection](#step-2)
   * [Step 3: Initial Server Configuration](#step-3)
   * [Step 4: Install Discourse](#step-4)
-  * [Step 5: Add Extra Features & Plugins](#step-5)
+  * [Step 5: Maintenance](#step-5)
+  * [Step 6: Add Extra Features & Plugins](#step-6)
 - [Forum Theme Installation](#theme)
 - [Acknowledgements](#acknowledgements)
 
@@ -177,16 +178,46 @@ Reboot the Droplet after running the aforementioned commands and rebuild the Dis
 
 Remember to activate and apply the DigitalOcean Cloud Firewall to the Droplet after rebuilding the forum.
 
-> For regular maintenance, whereby Discourse would need to be regularly updated via the `/admin/upgrade` subcategory directory on the website, we would also need to routinely run these commands to reclaim enough space so as to ensure that there would be minimal lag and prevent any `502 Bad Gateway` timeout errors:
-  ```console
-  $ sudo -s
-  $ cd /var/discourse
-  $ ./launcher rebuild app
-  $ ./launcher cleanup
-  ```
-> This is to remove any stopped Docker containers, delete any build cache, expunge any unused networks (if any) and prune any old dangling Docker images which might slowly pile up in the server for some reason. A cron(tab) job could also be set up to routinely conduct and execute this maintenance process.
+### Step 5: Maintenance <a name="step-5"></a>
 
-### Step 5: Add Extra Features & Plugins <a name="step-5"></a>
+[go to top](#top)
+
+For regular maintenance, whereby Discourse would need to be regularly updated via the `/admin/upgrade` subcategory directory on the website, we would also need to routinely run these commands to reclaim enough space so as to ensure that there would be minimal lag and prevent any `502 Bad Gateway` timeout errors:
+
+```console
+# Elevate your permissions as super user (root@sutdiscourse)
+$ sudo -s
+
+# Navigate to the SUTDiscourse installation folder
+$ cd /var/discourse
+
+# Rebuild the app
+$ ./launcher rebuild app
+
+# Start the pruning process only AFTER the app is rebuilt and relaunched (with its current status being turned on and running)
+$ ./launcher cleanup
+```
+
+This is to remove any stopped Docker containers, delete any build cache, expunge any unused networks (if any) and prune any old dangling Docker images which might slowly pile up in the server for some reason.
+
+A user-level cron(tab) job (on the `root` user) could also be set up to routinely conduct and execute this maintenance process at a specific time interval:
+
+```console
+$ sudo apt update
+$ sudo apt install cron
+$ sudo systemctl enable cron
+$ crontab -e
+```
+
+Add this line to the `/var/spool/cron/crontabs/root` file using your preferred selected file/text editor (with the syntax `@monthly` being a replacement shorthand for `0 0 1 * *`):
+
+```nano
+@monthly . cd /var/discourse && ./launcher rebuild app && ./launcher cleanup
+```
+
+> Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file.
+
+### Step 6: Add Extra Features & Plugins <a name="step-6"></a>
 
 [go to top](#top)
 

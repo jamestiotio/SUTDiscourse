@@ -196,7 +196,7 @@ $ cd /var/discourse
 $ ./launcher rebuild app
 
 # Start the pruning process only AFTER the app is rebuilt and relaunched (with its current status being turned on and running)
-$ ./launcher cleanup
+$ yes | ./launcher cleanup
 ```
 
 This is to remove any stopped Docker containers, delete any build cache, expunge any unused networks (if any) and prune any old dangling Docker images which might slowly pile up in the server for some reason.
@@ -213,7 +213,7 @@ $ crontab -e
 Add this line to the `/var/spool/cron/crontabs/root` file using your preferred selected file/text editor (with the syntax `@monthly` being a replacement shorthand for `0 0 1 * *`):
 
 ```nano
-@monthly . cd /var/discourse && ./launcher rebuild app && ./launcher cleanup
+@monthly . cd /var/discourse && ./launcher rebuild app && (yes | ./launcher cleanup)
 ```
 
 > Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file. Alternatively, you could also specify a different custom time interval, instead of `@monthly`.

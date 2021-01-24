@@ -239,6 +239,7 @@ More content coming soon!
 - https://github.com/discourse/discourse-calendar.git
 - https://github.com/discourse/discourse-cakeday.git
 - https://github.com/discourse/discourse-assign.git
+- https://github.com/discourse/discourse-math.git
 
 ## Forum Theme Installation <a name="theme"></a>
 

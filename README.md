@@ -192,6 +192,9 @@ $ sudo -s
 # Navigate to the SUTDiscourse installation folder
 $ cd /var/discourse
 
+# Fetch and download the latest version of the Discourse launcher
+$ git pull
+
 # Rebuild the app
 $ ./launcher rebuild app
 
@@ -240,6 +243,8 @@ More content coming soon!
 - https://github.com/discourse/discourse-cakeday.git
 - https://github.com/discourse/discourse-assign.git
 - https://github.com/discourse/discourse-math.git
+
+To add a plugin, simply add the plugin's repo URL to your container's `app.yml` file (`exec` section under the `after_code` hook), and then re-build the container.
 
 ## Forum Theme Installation <a name="theme"></a>
 

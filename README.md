@@ -210,16 +210,17 @@ A user-level cron(tab) job (on the `root` user) could also be set up to routinel
 $ sudo apt update
 $ sudo apt install cron
 $ sudo systemctl enable cron
+$ sudo systemctl start cron
 $ crontab -e
 ```
 
 Add this line to the `/var/spool/cron/crontabs/root` file using your preferred selected file/text editor (with the syntax `@monthly` being a replacement shorthand for `0 0 1 * *`):
 
 ```nano
-@monthly . cd /var/discourse && ./launcher rebuild app && (yes | ./launcher cleanup)
+@monthly cd /var/discourse && ./launcher rebuild app && (yes | ./launcher cleanup)
 ```
 
-> Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file. Alternatively, you could also specify a different custom time interval, instead of `@monthly`.
+> Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file. Alternatively, you could also specify a different custom time interval, instead of `@monthly`. Also, a reminder that you do not need to specify the user account to be used to execute the commands if we are using the `crontab -e` method (instead of directly editing the system-wide `/etc/crontab` file) since all commands will be run as the owner of the file.
 
 ### Step 6: Add Extra Features & Plugins <a name="step-6"></a>
 

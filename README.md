@@ -144,7 +144,7 @@ After entering the records for the first time, you should verify the DNS records
 
 Access your DigitalOcean's cloud server via SSH. Follow the instructions [here](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) first, without setting up `UFW` (since we are already using DigitalOcean Cloud Firewall).
 
-> Reasoning behind our choice of DigitalOcean Cloud Firewall instead of `UFW` is explained [here](https://www.digitalocean.com/community/questions/disabling-ufw-in-favour-of-do-cloud-firewall#comment_70283). Please only choose one to avoid redundancy or even conflicting firewall rules.
+> Reasoning behind our choice of DigitalOcean Cloud Firewall instead of `UFW` is explained [here](https://www.digitalocean.com/community/questions/disabling-ufw-in-favour-of-do-cloud-firewall?comment=70283). Please only choose one to avoid redundancy or even conflicting firewall rules.
 
 Remember to add a 2 GB swapfile by following the instructions [here](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04) (in Step 3, change `1G` to `2G`). Do not worry too much about the SSD warning since this swap space will only serve as an [_"insurance policy"_](https://meta.discourse.org/t/create-a-swapfile-for-your-linux-server/13880) during heavy work load times.
 

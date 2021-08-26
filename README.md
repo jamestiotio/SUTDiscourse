@@ -113,7 +113,11 @@ To improve the security of the issued SSL certificates, we can restrict the cert
 | ---------- | ---- | ---- | ------- | ------------------------------ | ------ |
 | CAA Record | `@`  | `0`  | `issue` | `letsencrypt.org`              | 60 min |
 
+> If you are pointing the `discourse` subdomain to the Droplet instead of the main root domain, use `discourse` as the value under `Host`.
+
 #### Namecheap-Mailgun
+
+> If you are pointing the `discourse` subdomain to the Droplet instead of the main root domain, replace any `mg` values with `mg.discourse` under the `Host` column for this sub-section.
 
 Check your specific records in Mailgun under `Sending` > `Domain settings`.
 

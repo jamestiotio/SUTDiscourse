@@ -86,7 +86,7 @@ After that, create a DigitalOcean Cloud Firewall (`Manage` > `Networking` > `Fir
 
 #### Mailgun
 
-Register for a free trial account (Flex Tier Plan) and activate the account by verifying through your email and mobile phone. After that, go to `Sending` > `Domains` and click `Add New Domain`. Use a `mg` subdomain for the domain name (`mg.mydomain.com`). Either `US` or `EU` is fine (we chose `EU` since Europe is closer to Singapore). Enable the `Create DKIM Authority` checkbox and select `2048`. Turn on `Click tracking`, `Open tracking` and `Unsubscribes` under `Sending` > `Domain settings` > `Domain settings` > `Tracking`.
+Register for a free trial account (Flex Tier Plan) and activate the account by verifying through your email and mobile phone. After that, go to `Sending` > `Domains` and click `Add New Domain`. Use a `mg` subdomain for the domain name (`mg.sutdiscourse.org`). Either `US` or `EU` is fine (we chose `EU` since Europe is closer to Singapore). Enable the `Create DKIM Authority` checkbox and select `2048`. Turn on `Click tracking`, `Open tracking` and `Unsubscribes` under `Sending` > `Domain settings` > `Domain settings` > `Tracking`.
 
 ### Step 2: Service Inter-Connection <a name="step-2"></a>
 

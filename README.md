@@ -122,10 +122,12 @@ In Namecheap > `Domain List`, select your domain and click `Manage`. Under the `
 | Type | Host | Value | TTL |
 | --- | --- | --- | --- |
 | TXT Record | `mg` | `v=spf1 include:eu.mailgun.org ~all` | 60 min |
-| TXT Record | `pic._domainkey.mg` | `k=rsa; p=...` | 60 min |
+| TXT Record | `<xxx>._domainkey.mg` | `k=rsa; p=...` | 60 min |
 | CNAME Record | `email.mg` | `eu.mailgun.org` | Automatic |
 
-The first entry is for SPF, while the second entry is for DKIM. Both are required for our Discourse forum. The `CNAME Record` is optional for tracking purposes.
+> `<xxx>` and `p=...` can be anything that Mailgun specifies (both of them vary from domain to domain).
+
+The first entry is for SPF, while the second entry is for DKIM. Both are required for our Discourse forum. The second TXT record contains the DKIM public key that Mailgun would automatically generate on their side. The `CNAME Record` is optional for tracking purposes.
 
 In Namecheap > `Domain List`, select your domain and click `Manage`. Under the `Advanced DNS` > `Mail Settings` section, choose `Custom MX` and add 2 new records with the following details:
 

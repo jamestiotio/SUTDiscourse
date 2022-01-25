@@ -2,7 +2,7 @@
 
 The platform for SUTD's community discussion. Free, open, simple.
 
-<a href="https://observatory.mozilla.org/analyze/sutdiscourse.org"><img alt="Mozilla HTTP Observatory Grade" src="https://img.shields.io/mozilla-observatory/grade-score/sutdiscourse.org?publish&style=for-the-badge"></a>
+<a href="https://observatory.mozilla.org/analyze/discourse.sutd.edu.sg"><img alt="Mozilla HTTP Observatory Grade" src="https://img.shields.io/mozilla-observatory/grade-score/discourse.sutd.edu.sg?publish&style=for-the-badge"></a>
 
 ## Introduction
 
@@ -25,7 +25,7 @@ This README will document the instructions necessary to setup the SUTD Discourse
 
 [go to top](#top)
 
-For now, we will be using Namecheap, DigitalOcean and Mailgun. Once we have gone official, we will be migrating to the Microsoft Outlook MX Mail Server officially utilized by SUTD so as to smoothly support and integrate into the SUTD emailing system and its current Active Directory. We will also consider migrating to `discourse.sutd.edu.sg` as the official subdomain and utilizing an internal SUTD server to provide hosting services, thereby slowly migrating away from external service providers such as Namecheap and DigitalOcean over time. The usage of Let's Encrypt would be reconsidered in the future, but it is likely to stay (unless we migrate from DV to OV or even EV certificates). The system environment setup (such as using Ubuntu 18.04.3 LTS x64 and Docker) should be similar between our current setup and the eventual official setup. Any instructions for migration and system update/upgrade would be documented here as well.
+For now, we will be using Namecheap, DigitalOcean and Mailgun. Once we have gone official, we will be migrating to the Microsoft Outlook MX Mail Server officially utilized by SUTD so as to smoothly support and integrate into the SUTD emailing system and its current Active Directory. Currently, we are using the official subdomain URL of `discourse.sutd.edu.sg`. We will also consider utilizing an internal SUTD server to provide hosting services, thereby slowly migrating away from external service providers such as Namecheap and DigitalOcean over time. The usage of Let's Encrypt would be reconsidered in the future, but it is likely to stay (unless we migrate from DV to OV or even EV certificates). The system environment setup (such as using Ubuntu 18.04.3 LTS x64 and Docker) should be similar between our current setup and the eventual official setup. Any instructions for migration and system update/upgrade would be documented here as well.
 
 > NOTE: We would need to switch to-and-fro between Namecheap, DigitalOcean and Mailgun as we need relevant information from one another to be inputted to each other's settings panels for a complete setup.
 
@@ -86,7 +86,7 @@ After that, create a DigitalOcean Cloud Firewall (`Manage` > `Networking` > `Fir
 
 #### Mailgun
 
-Register for a free trial account (Flex Tier Plan) and activate the account by verifying through your email and mobile phone. After that, go to `Sending` > `Domains` and click `Add New Domain`. Use a `mg` subdomain for the domain name (`mg.sutdiscourse.org`). Either `US` or `EU` is fine (we chose `EU` since Europe is closer to Singapore). Enable the `Create DKIM Authority` checkbox and select `2048`. Turn on `Click tracking`, `Open tracking` and `Unsubscribes` under `Sending` > `Domain settings` > `Domain settings` > `Tracking`.
+Register for a free trial account (Flex Tier Plan) and activate the account by verifying through your email and mobile phone. After that, go to `Sending` > `Domains` and click `Add New Domain`. Use a `mg` subdomain for the domain name (`mg.discourse.sutd.edu.sg`). Either `US` or `EU` is fine (we chose `EU` since Europe is closer to Singapore). Enable the `Create DKIM Authority` checkbox and select `2048`. Turn on `Click tracking`, `Open tracking` and `Unsubscribes` under `Sending` > `Domain settings` > `Domain settings` > `Tracking`.
 
 ### Step 2: Service Inter-Connection <a name="step-2"></a>
 
@@ -227,6 +227,8 @@ Add this line to the `/var/spool/cron/crontabs/root` file using your preferred s
 ```
 
 > Note that not all `cron` daemons can parse this relatively new shortcut syntax of `@monthly` (particularly older versions) so double-check that it works and that `crontab` does not throw any errors before you rely on it and saving the job file. Alternatively, you could also specify a different custom time interval, instead of `@monthly`. Also, a reminder that you do not need to specify the user account to be used to execute the commands if we are using the `crontab -e` method (instead of directly editing the system-wide `/etc/crontab` file) since all commands will be run as the owner of the file.
+
+If you need to migrate the Discourse forum's domain at any time for any reason, you can follow the guide [here](https://meta.discourse.org/t/change-the-domain-name-or-rename-my-discourse/16098).
 
 ### Step 6: Add Extra Features & Plugins <a name="step-6"></a>
 
